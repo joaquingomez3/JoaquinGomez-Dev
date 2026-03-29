@@ -3,13 +3,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github, Globe, Server, Building2 } from "lucide-react";
+import { ExternalLink, Github, Globe, Server, Building2, Smartphone } from "lucide-react";
 
 interface Project {
   title: string;
   description: string;
   longDescription: string;
-  type: "Web" | "API" | "Gestión";
+  type: "Web" | "API" | "Gestión" | "Mobile";
   technologies: string[];
   githubUrl: string;
   demoUrl?: string;
@@ -19,6 +19,18 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    title: "Challenge Fit",
+    description: "App Android para entrenamiento personalizado con roles",
+    longDescription:
+      "Plataforma mobile que conecta entrenadores y alumnos en un entorno de entrenamiento digital. Implementa un sistema de login con roles diferenciados: los entrenadores acceden a un panel de administración donde crean rutinas, asignan ejercicios a sus alumnos y publican desafíos; mientras que los alumnos ven únicamente su contenido personalizado, registran su progreso y visualizan sus desafíos activos. La autenticación con JWT garantiza que cada vista y endpoint esté protegido según el rol del usuario.",
+    type: "Mobile",
+    technologies: [".NET", "C#", "Java", "Android Studio", "MySQL", "JWT", "REST API"],
+    githubUrl: "https://github.com/joaquingomez3",
+    gradient: "from-orange-500/20 via-red-500/10 to-rose-500/20",
+    icon: <Smartphone className="w-5 h-5" />,
+    gridClass: "md:col-span-2 md:row-span-1",
+  },
   {
     title: "Sistema de Agenda — Consultorios Médicos",
     description: "Gestión integral de turnos y pacientes",
