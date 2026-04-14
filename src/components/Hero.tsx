@@ -140,7 +140,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="/GomezJoaquin-CV.pdf"
+            href="/CV-GomezJoaquin.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="group px-8 py-4 rounded-2xl border border-border-light bg-surface-light/50 backdrop-blur-sm text-text-primary font-semibold text-lg hover:border-accent/40 hover:bg-surface-lighter/50 transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2"
