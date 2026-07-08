@@ -2,7 +2,12 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowUpRight, Lock } from "lucide-react";
+import { ArrowUpRight, Github, Lock } from "lucide-react";
+
+interface Repo {
+  label: string;
+  href: string;
+}
 
 interface Project {
   index: string;
@@ -12,10 +17,11 @@ interface Project {
   description: string;
   metrics: string[];
   tech: string[];
-  href?: string;
+  repos?: Repo[];
   confidential?: boolean;
 }
 
+// NOTA: reemplazá los "href" de abajo por las URLs reales de cada repo.
 const projects: Project[] = [
   {
     index: "01",
@@ -36,8 +42,24 @@ const projects: Project[] = [
     description:
       "Plataforma de matching entre entrenadores y alumnos. Diseñé e integré individualmente una API REST de más de 20 endpoints consumida desde una app Android con Retrofit, con login por 2 roles, módulo de vinculación con seguimiento de progreso y CRUD completos de rutinas y desafíos. Resolví de forma autónoma un bug de cámara en Android 13 vía debugging asistido por IA.",
     metrics: ["+20 endpoints", "+650 hs", "10 pantallas", "10-11 tablas"],
-    tech: [".NET / C#", "Android (Java)", "Retrofit", "MySQL", "JWT", "REST API"],
-    href: "https://github.com/joaquingomez3",
+    tech: [
+      ".NET / C#",
+      "Android (Java)",
+      "Retrofit",
+      "MySQL",
+      "JWT",
+      "REST API",
+    ],
+    repos: [
+      {
+        label: "API",
+        href: "https://github.com/joaquingomez3/ApiChallengeFit.git",
+      },
+      {
+        label: "App Android",
+        href: "https://github.com/joaquingomez3/ChallengeFit.git",
+      },
+    ],
   },
   {
     index: "03",
@@ -48,7 +70,12 @@ const projects: Project[] = [
       "Sistema web de gestión de turnos con discriminación de 3 roles (secretaria, paciente y administrador). Implementé los CRUD de pacientes, doctores, obras sociales y días feriados, integrando FullCalendar y DataTables, cubriendo todo el flujo desde la solicitud del paciente hasta la confirmación.",
     metrics: ["7 tablas", "3 roles", "+380 hs", "8-9 pantallas"],
     tech: ["Node.js", "Express", "MySQL", "Bootstrap", "FullCalendar"],
-    href: "https://github.com/joaquingomez3",
+    repos: [
+      {
+        label: "Repositorio",
+        href: "https://github.com/joaquingomez3/agenda-consultorios.git",
+      },
+    ],
   },
   {
     index: "04",
@@ -59,7 +86,20 @@ const projects: Project[] = [
       "Plataforma de gestión inmobiliaria con 3 roles de usuario. Lideré íntegramente la app Android (6 pantallas: login, perfil, propiedades, contratos, inquilinos y carga de imágenes) y participé en partes iguales del desarrollo web en .NET, incluyendo los CRUD de inmuebles, propietarios e inquilinos y el cálculo de pagos mensuales.",
     metrics: ["Web + Mobile", "3 roles", "6-7 tablas", "Cálculo de pagos"],
     tech: [".NET", "C#", "MySQL", "Bootstrap", "Android Studio"],
-    href: "https://github.com/joaquingomez3",
+    repos: [
+      {
+        label: "Web (.NET)",
+        href: "https://github.com/joaquingomez3/BienesRaices-JP.git",
+      },
+      {
+        label: "App Android",
+        href: "https://github.com/joaquingomez3/InmobiliariaApi.git",
+      },
+      {
+        label: "API",
+        href: "https://github.com/joaquingomez3/ApiBienesRaices.git",
+      },
+    ],
   },
 ];
 
@@ -67,18 +107,13 @@ function Row({ project, i }: { project: Project; i: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  const Wrapper = project.href ? motion.a : motion.div;
-
   return (
-    <Wrapper
+    <motion.article
       ref={ref}
-      {...(project.href
-        ? { href: project.href, target: "_blank", rel: "noopener noreferrer" }
-        : {})}
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group block border-t border-line py-8 sm:py-10 transition-colors duration-300 hover:bg-paper-2 -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-lg"
+      className="group border-t border-line py-8 sm:py-10 transition-colors duration-300 hover:bg-paper-2 -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-lg"
     >
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline">
         {/* Index + year */}
@@ -111,7 +146,7 @@ function Row({ project, i }: { project: Project; i: number }) {
           </div>
         </div>
 
-        {/* Tech + arrow */}
+        {/* Tech + repo links */}
         <div className="md:col-span-3 flex flex-col md:items-end gap-4">
           <div className="flex flex-wrap md:justify-end gap-x-3 gap-y-1">
             {project.tech.map((t) => (
@@ -120,23 +155,32 @@ function Row({ project, i }: { project: Project; i: number }) {
               </span>
             ))}
           </div>
-          <span
-            className={`inline-flex items-center gap-1 text-xs font-semibold ${
-              project.confidential ? "text-ink-3" : "text-ink group-hover:text-accent"
-            } transition-colors`}
-          >
-            {project.confidential ? (
-              "Confidencial"
-            ) : (
-              <>
-                Ver en GitHub
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </>
-            )}
-          </span>
+
+          {project.confidential ? (
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink-3">
+              <Lock className="w-3.5 h-3.5" />
+              Confidencial
+            </span>
+          ) : (
+            <div className="flex flex-wrap md:justify-end gap-2">
+              {project.repos?.map((repo) => (
+                <a
+                  key={repo.label}
+                  href={repo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink border border-line-strong rounded-full px-3 py-1.5 hover:border-ink hover:text-accent transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  {repo.label}
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-    </Wrapper>
+    </motion.article>
   );
 }
 
@@ -161,7 +205,8 @@ export default function Projects() {
             </h2>
           </div>
           <p className="hidden sm:block text-sm text-ink-3 max-w-xs text-right">
-            Trabajo académico, personal y profesional. Del backend a la app móvil.
+            Trabajo académico, personal y profesional. Del backend a la app
+            móvil.
           </p>
         </motion.div>
 
