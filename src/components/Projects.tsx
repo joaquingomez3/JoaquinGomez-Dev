@@ -21,7 +21,6 @@ interface Project {
   confidential?: boolean;
 }
 
-// NOTA: reemplazá los "href" de abajo por las URLs reales de cada repo.
 const projects: Project[] = [
   {
     index: "01",
@@ -42,23 +41,10 @@ const projects: Project[] = [
     description:
       "Plataforma de matching entre entrenadores y alumnos. Diseñé e integré individualmente una API REST de más de 20 endpoints consumida desde una app Android con Retrofit, con login por 2 roles, módulo de vinculación con seguimiento de progreso y CRUD completos de rutinas y desafíos. Resolví de forma autónoma un bug de cámara en Android 13 vía debugging asistido por IA.",
     metrics: ["+20 endpoints", "+650 hs", "10 pantallas", "10-11 tablas"],
-    tech: [
-      ".NET / C#",
-      "Android (Java)",
-      "Retrofit",
-      "MySQL",
-      "JWT",
-      "REST API",
-    ],
+    tech: [".NET / C#", "Android (Java)", "Retrofit", "MySQL", "JWT", "REST API"],
     repos: [
-      {
-        label: "API",
-        href: "https://github.com/joaquingomez3/ApiChallengeFit.git",
-      },
-      {
-        label: "App Android",
-        href: "https://github.com/joaquingomez3/ChallengeFit.git",
-      },
+      { label: "API", href: "https://github.com/joaquingomez3/ApiChallengeFit.git" },
+      { label: "App Android", href: "https://github.com/joaquingomez3/ChallengeFit.git" },
     ],
   },
   {
@@ -71,10 +57,7 @@ const projects: Project[] = [
     metrics: ["7 tablas", "3 roles", "+380 hs", "8-9 pantallas"],
     tech: ["Node.js", "Express", "MySQL", "Bootstrap", "FullCalendar"],
     repos: [
-      {
-        label: "Repositorio",
-        href: "https://github.com/joaquingomez3/agenda-consultorios.git",
-      },
+      { label: "Repositorio", href: "https://github.com/joaquingomez3/agenda-consultorios.git" },
     ],
   },
   {
@@ -87,18 +70,9 @@ const projects: Project[] = [
     metrics: ["Web + Mobile", "3 roles", "6-7 tablas", "Cálculo de pagos"],
     tech: [".NET", "C#", "MySQL", "Bootstrap", "Android Studio"],
     repos: [
-      {
-        label: "Web (.NET)",
-        href: "https://github.com/joaquingomez3/BienesRaices-JP.git",
-      },
-      {
-        label: "App Android",
-        href: "https://github.com/joaquingomez3/InmobiliariaApi.git",
-      },
-      {
-        label: "API",
-        href: "https://github.com/joaquingomez3/ApiBienesRaices.git",
-      },
+      { label: "Web (.NET)", href: "https://github.com/joaquingomez3/BienesRaices-JP.git" },
+      { label: "App Android", href: "https://github.com/joaquingomez3/InmobiliariaApi.git" },
+      { label: "API", href: "https://github.com/joaquingomez3/ApiBienesRaices.git" },
     ],
   },
 ];
@@ -115,7 +89,7 @@ function Row({ project, i }: { project: Project; i: number }) {
       transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="group border-t border-line py-8 sm:py-10 transition-colors duration-300 hover:bg-paper-2 -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-lg"
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-baseline">
         {/* Index + year */}
         <div className="md:col-span-2 flex md:flex-col items-center md:items-start justify-between gap-2">
           <span className="font-mono text-sm text-accent">{project.index}</span>
@@ -147,7 +121,7 @@ function Row({ project, i }: { project: Project; i: number }) {
         </div>
 
         {/* Tech + repo links */}
-        <div className="md:col-span-3 flex flex-col md:items-end gap-4">
+        <div className="md:col-span-3 flex flex-col md:items-end gap-4 mt-2 md:mt-0">
           <div className="flex flex-wrap md:justify-end gap-x-3 gap-y-1">
             {project.tech.map((t) => (
               <span key={t} className="text-xs text-ink-3">
@@ -189,7 +163,7 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="relative py-24 sm:py-32 px-6 lg:px-8">
+    <section id="projects" className="relative py-20 sm:py-32 px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -205,8 +179,7 @@ export default function Projects() {
             </h2>
           </div>
           <p className="hidden sm:block text-sm text-ink-3 max-w-xs text-right">
-            Trabajo académico, personal y profesional. Del backend a la app
-            móvil.
+            Trabajo académico, personal y profesional. Del backend a la app móvil.
           </p>
         </motion.div>
 

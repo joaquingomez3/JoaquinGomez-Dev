@@ -8,7 +8,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const stats = [
   { value: "+20", label: "endpoints REST" },
   { value: "+650", label: "horas / ChallengeFit" },
-  { value: "4", label: "proyectos full stack" },
+  { value: "4", label: "proyectos" },
   { value: "3", label: "certificaciones" },
 ];
 
@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 px-6 lg:px-8"
+      className="relative min-h-screen flex flex-col justify-center pt-28 pb-14 sm:pb-16 px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto w-full">
         {/* Kicker */}
@@ -24,7 +24,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease }}
-          className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8"
+          className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6 sm:mb-8"
         >
           <span className="kicker">Full Stack Junior — San Luis, AR</span>
           <span className="inline-flex items-center gap-2 text-xs font-medium text-ink-2">
@@ -41,7 +41,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.05 }}
-          className="font-display font-semibold text-ink leading-[0.92] tracking-tight text-[clamp(3rem,11vw,8.5rem)]"
+          className="font-display font-semibold text-ink leading-[0.92] tracking-tight text-[clamp(2.75rem,11vw,8.5rem)]"
         >
           Joaquín
           <br />
@@ -53,7 +53,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.15 }}
-          className="mt-8 max-w-2xl text-xl sm:text-2xl text-ink-2 leading-snug"
+          className="mt-6 sm:mt-8 max-w-2xl text-lg sm:text-2xl text-ink-2 leading-snug"
         >
           Desarrollador Full Stack enfocado en{" "}
           <span className="font-display italic text-ink">APIs backend</span> con
@@ -65,7 +65,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.22 }}
-          className="mt-5 max-w-xl text-base text-ink-3 leading-relaxed"
+          className="mt-4 sm:mt-5 max-w-xl text-[0.95rem] sm:text-base text-ink-3 leading-relaxed"
         >
           Próximo a graduarme de la Tecnicatura Universitaria en Desarrollo de
           Software (UdeLaPunta). Diseño soluciones de punta a punta y aprendo
@@ -77,7 +77,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.3 }}
-          className="mt-10 flex flex-wrap items-center gap-3"
+          className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3"
         >
           <a
             href="#projects"
@@ -120,14 +120,21 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.4 }}
-          className="mt-16 grid grid-cols-2 sm:grid-cols-4 border-t border-line"
+          className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 border-t border-line"
         >
-          {stats.map((s) => (
-            <div key={s.label} className="py-5 pr-4 border-line">
-              <dt className="font-display text-4xl font-semibold text-ink">
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className={`py-5 sm:pl-5 ${
+                i % 2 !== 0 ? "pl-5 border-l border-line" : ""
+              } ${i >= 2 ? "border-t border-line sm:border-t-0" : ""} ${
+                i !== 0 ? "sm:border-l sm:border-line" : ""
+              }`}
+            >
+              <dt className="font-display text-3xl sm:text-4xl font-semibold text-ink">
                 {s.value}
               </dt>
-              <dd className="mt-1 text-xs text-ink-3 uppercase tracking-wider">
+              <dd className="mt-1 text-[0.7rem] sm:text-xs text-ink-3 uppercase tracking-wider">
                 {s.label}
               </dd>
             </div>

@@ -76,12 +76,10 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
 function Item({ entry }: { entry: Entry }) {
   return (
     <div className="border-t border-line pt-4">
-      <div className="flex items-baseline justify-between gap-4">
-        <h4 className="font-display text-lg font-semibold text-ink leading-snug">
-          {entry.title}
-        </h4>
-        <span className="font-mono text-xs text-ink-3 shrink-0">{entry.date}</span>
-      </div>
+      <span className="font-mono text-xs text-accent-ink">{entry.date}</span>
+      <h4 className="mt-1.5 font-display text-lg font-semibold text-ink leading-snug">
+        {entry.title}
+      </h4>
       <p className="mt-1 text-sm text-ink-2">{entry.meta}</p>
       {entry.detail && (
         <p className="mt-2 text-sm text-ink-3 leading-relaxed">{entry.detail}</p>
@@ -95,17 +93,17 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 px-6 lg:px-8">
+    <section id="about" className="relative py-20 sm:py-32 px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-12 sm:mb-16"
         >
           <span className="kicker">Sobre mí</span>
-          <p className="mt-6 font-display text-3xl sm:text-5xl font-medium text-ink leading-[1.15] tracking-tight max-w-4xl">
+          <p className="mt-6 font-display text-[clamp(1.6rem,6vw,3rem)] font-medium text-ink leading-[1.18] tracking-tight max-w-4xl">
             Estudiante avanzado, ordenado y autodidacta. Diseñé de punta a punta
             una API de{" "}
             <span className="italic text-accent">+20 endpoints</span> y sistemas
@@ -115,8 +113,8 @@ export default function About() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          <div className="lg:col-span-7 space-y-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16">
+          <div className="lg:col-span-7 space-y-12 sm:space-y-14">
             <Block title="Experiencia">
               {experience.map((e) => (
                 <Item key={e.title} entry={e} />
@@ -129,7 +127,7 @@ export default function About() {
             </Block>
           </div>
 
-          <div className="lg:col-span-5 space-y-14">
+          <div className="lg:col-span-5 space-y-12 sm:space-y-14">
             <Block title="Certificaciones">
               {certs.map((e) => (
                 <Item key={e.title} entry={e} />

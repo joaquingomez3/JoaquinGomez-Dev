@@ -94,7 +94,7 @@ export default function TechStack() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="tech" className="relative py-24 sm:py-32 px-6 lg:px-8 bg-paper-2">
+    <section id="tech" className="relative py-20 sm:py-32 px-6 lg:px-8 bg-paper-2">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}

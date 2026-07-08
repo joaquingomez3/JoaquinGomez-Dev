@@ -20,11 +20,6 @@ const links = [
     value: "github.com/joaquingomez3",
     href: "https://github.com/joaquingomez3",
   },
-  {
-    label: "Teléfono",
-    value: "+54 9 2664 894029",
-    href: "tel:+5492664894029",
-  },
 ];
 
 export default function Contact() {
@@ -34,7 +29,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-24 sm:py-32 px-6 lg:px-8 bg-ink text-paper"
+      className="relative py-20 sm:py-32 px-6 lg:px-8 bg-ink text-paper"
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -43,15 +38,15 @@ export default function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="font-mono text-[0.72rem] tracking-[0.22em] uppercase text-accent">
+          <span className="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent">
             Contacto
           </span>
-          <h2 className="mt-6 font-display text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-tight leading-[0.95]">
+          <h2 className="mt-5 font-display text-[clamp(2.75rem,13vw,7rem)] font-semibold tracking-tight leading-[0.95]">
             ¿Trabajamos
             <br />
             <span className="italic">juntos?</span>
           </h2>
-          <p className="mt-8 max-w-xl text-lg text-paper/70">
+          <p className="mt-6 max-w-xl text-base sm:text-lg text-paper/70 leading-relaxed">
             Busco mi primera experiencia laboral en IT, con disponibilidad
             inmediata. Si tenés una vacante o un proyecto, escribime — respondo
             rápido.
@@ -59,7 +54,7 @@ export default function Contact() {
 
           <a
             href="mailto:gomezjoaquing3@gmail.com"
-            className="group mt-10 inline-flex items-center gap-3 bg-accent text-paper text-base font-semibold pl-7 pr-6 py-4 rounded-full hover:bg-paper hover:text-ink transition-colors duration-300"
+            className="group mt-8 inline-flex items-center gap-3 bg-accent text-paper text-sm sm:text-base font-semibold pl-6 pr-5 py-3.5 sm:py-4 rounded-full hover:bg-paper hover:text-ink transition-colors duration-300"
           >
             Enviame un email
             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -70,7 +65,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 border-t border-paper/15"
+          className="mt-16 sm:mt-20 border-t border-paper/15"
         >
           {links.map((link) => (
             <a
@@ -78,15 +73,17 @@ export default function Contact() {
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="group flex items-baseline justify-between gap-6 border-b border-paper/15 py-6 transition-colors hover:text-accent"
+              className="group block border-b border-paper/15 py-5 sm:py-6 transition-colors"
             >
-              <span className="font-mono text-xs uppercase tracking-widest text-paper/50 group-hover:text-accent/70 transition-colors">
-                {link.label}
-              </span>
-              <span className="flex items-center gap-3 font-display text-xl sm:text-3xl font-medium text-paper group-hover:text-accent transition-colors">
-                {link.value}
-                <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-              </span>
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <span className="font-mono text-[0.7rem] uppercase tracking-widest text-paper/50 group-hover:text-accent transition-colors">
+                  {link.label}
+                </span>
+                <span className="flex items-center gap-2 min-w-0 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-paper group-hover:text-accent transition-colors">
+                  <span className="truncate">{link.value}</span>
+                  <ArrowUpRight className="w-5 h-5 shrink-0 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </span>
+              </div>
             </a>
           ))}
         </motion.div>
