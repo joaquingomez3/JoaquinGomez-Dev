@@ -2,12 +2,14 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, ReactNode } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 interface Entry {
   title: string;
   meta: string;
   date: string;
   detail?: string;
+  file?: string;
 }
 
 const experience: Entry[] = [
@@ -44,16 +46,19 @@ const certs: Entry[] = [
     title: "Flutter — Móvil: De Cero a Experto",
     meta: "Udemy",
     date: "2026",
+    file: "/certificado-flutter.pdf",
   },
   {
     title: ".NET Backend: .NET Core, SQL Server y Seguridad JWT",
     meta: "Udemy",
     date: "2025",
+    file: "/certificado-net.pdf",
   },
   {
     title: "Desarrollo de API RESTful con Node.js y MySQL",
     meta: "Udemy",
     date: "2024",
+    file: "/certificado-node.pdf",
   },
 ];
 
@@ -83,6 +88,17 @@ function Item({ entry }: { entry: Entry }) {
       <p className="mt-1 text-sm text-ink-2">{entry.meta}</p>
       {entry.detail && (
         <p className="mt-2 text-sm text-ink-3 leading-relaxed">{entry.detail}</p>
+      )}
+      {entry.file && (
+        <a
+          href={entry.file}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-ink border border-line-strong rounded-full px-3 py-1.5 hover:border-ink hover:text-accent transition-colors"
+        >
+          Ver certificado
+          <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </a>
       )}
     </div>
   );
