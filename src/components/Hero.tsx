@@ -1,181 +1,151 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Github, FileText, Sparkles, MapPin } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight, Github, Linkedin, FileText } from "lucide-react";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-};
+const ease = [0.22, 1, 0.36, 1] as const;
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
+const stats = [
+  { value: "+20", label: "endpoints REST" },
+  { value: "+650", label: "horas / ChallengeFit" },
+  { value: "4", label: "proyectos full stack" },
+  { value: "3", label: "certificaciones" },
+];
 
 export default function Hero() {
   return (
     <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      id="top"
+      className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 px-6 lg:px-8"
     >
-      {/* Background orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="max-w-6xl mx-auto w-full">
+        {/* Kicker */}
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.15, 0.25, 0.15],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-accent/20 blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-cyan-accent/15 blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.08, 0.15, 0.08],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[100px]"
-        />
-      </div>
-
-      {/* Content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 max-w-5xl mx-auto px-6 text-center"
-      >
-        {/* Badge */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm">
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-accent">
-              Estudiante avanzado — Tec. en Desarrollo de Software
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease }}
+          className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8"
+        >
+          <span className="kicker">Full Stack Junior — San Luis, AR</span>
+          <span className="inline-flex items-center gap-2 text-xs font-medium text-ink-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
             </span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          </div>
+            Disponible para trabajar
+          </span>
         </motion.div>
 
         {/* Name */}
-        <motion.p
-          variants={itemVariants}
-          className="text-lg sm:text-xl text-text-secondary font-medium tracking-wide mb-2"
-        >
-          Hola, soy
-        </motion.p>
-
-        {/* Main heading */}
         <motion.h1
-          variants={itemVariants}
-          className="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tight leading-[0.9] mb-6"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease, delay: 0.05 }}
+          className="font-display font-semibold text-ink leading-[0.92] tracking-tight text-[clamp(3rem,11vw,8.5rem)]"
         >
-          <span className="bg-gradient-to-r from-accent via-accent-light to-cyan-accent bg-clip-text text-transparent animate-gradient">
-            Joaquín Gómez
-          </span>
+          Joaquín
+          <br />
+          Gómez<span className="text-accent">.</span>
         </motion.h1>
 
-        {/* Title */}
+        {/* Role */}
         <motion.p
-          variants={itemVariants}
-          className="text-2xl sm:text-3xl font-bold text-text-primary mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 0.15 }}
+          className="mt-8 max-w-2xl text-xl sm:text-2xl text-ink-2 leading-snug"
         >
-          Fullstack Developer
+          Desarrollador Full Stack enfocado en{" "}
+          <span className="font-display italic text-ink">APIs backend</span> con
+          Node.js y .NET, y apps móviles híbridas con{" "}
+          <span className="font-display italic text-ink">Flutter</span>.
         </motion.p>
 
-        {/* Subtitle */}
         <motion.p
-          variants={itemVariants}
-          className="max-w-2xl mx-auto text-lg sm:text-xl text-text-secondary leading-relaxed mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 0.22 }}
+          className="mt-5 max-w-xl text-base text-ink-3 leading-relaxed"
         >
-          Apasionado por crear software de calidad.
-          Especializado en{" "}
-          <span className="text-accent font-semibold">.NET / C#</span>,{" "}
-          <span className="text-accent font-semibold">React</span>,{" "}
-          <span className="text-accent font-semibold">Node.js</span> y{" "}
-          <span className="text-accent font-semibold">MySQL</span>.
+          Próximo a graduarme de la Tecnicatura Universitaria en Desarrollo de
+          Software (UdeLaPunta). Diseño soluciones de punta a punta y aprendo
+          rápido lo que un proyecto real necesita.
         </motion.p>
-
-        <motion.div
-          variants={itemVariants}
-          className="flex items-center justify-center gap-2 text-text-muted mb-10"
-        >
-          <MapPin className="w-4 h-4" />
-          <span className="text-sm">San Luis, La Punta — Argentina</span>
-        </motion.div>
 
         {/* CTAs */}
         <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 0.3 }}
+          className="mt-10 flex flex-wrap items-center gap-3"
         >
           <a
             href="#projects"
-            className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-accent to-accent-dark text-white font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-accent/25 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 bg-ink text-paper text-sm font-semibold pl-6 pr-5 py-3.5 rounded-full hover:bg-accent transition-colors duration-300"
           >
-            <span className="relative z-10 flex items-center gap-2">
-              Mis Proyectos
-              <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-dark to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            Ver proyectos
+            <ArrowDownRight className="w-4 h-4 group-hover:translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
           </a>
-
           <a
-            href="/CV-GomezJoaquin.pdf"
+            href="/CV_Joaquin_Gomez.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="group px-8 py-4 rounded-2xl border border-border-light bg-surface-light/50 backdrop-blur-sm text-text-primary font-semibold text-lg hover:border-accent/40 hover:bg-surface-lighter/50 transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2"
+            className="group inline-flex items-center gap-2 border border-line-strong text-ink text-sm font-semibold pl-5 pr-5 py-3.5 rounded-full hover:border-ink transition-colors duration-300"
           >
-            <FileText className="w-5 h-5 text-text-secondary group-hover:text-accent transition-colors" />
-            Ver CV
+            <FileText className="w-4 h-4 text-ink-3 group-hover:text-accent transition-colors" />
+            Descargar CV
           </a>
-
           <a
             href="https://github.com/joaquingomez3"
             target="_blank"
             rel="noopener noreferrer"
-            className="group px-8 py-4 rounded-2xl border border-border-light bg-surface-light/50 backdrop-blur-sm text-text-primary font-semibold text-lg hover:border-accent/40 hover:bg-surface-lighter/50 transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2"
+            aria-label="GitHub"
+            className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-line-strong text-ink hover:border-ink hover:text-accent transition-colors"
           >
-            <Github className="w-5 h-5 text-text-secondary group-hover:text-accent transition-colors" />
-            GitHub
+            <Github className="w-[18px] h-[18px]" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/joaquingomez-dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-line-strong text-ink hover:border-ink hover:text-accent transition-colors"
+          >
+            <Linkedin className="w-[18px] h-[18px]" />
           </a>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 flex flex-col items-center gap-2"
+        {/* Stat strip */}
+        <motion.dl
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 0.4 }}
+          className="mt-16 grid grid-cols-2 sm:grid-cols-4 border-t border-line"
         >
-          <span className="text-xs text-text-muted uppercase tracking-widest">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ArrowDown className="w-4 h-4 text-text-muted" />
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          {stats.map((s) => (
+            <div key={s.label} className="py-5 pr-4 border-line">
+              <dt className="font-display text-4xl font-semibold text-ink">
+                {s.value}
+              </dt>
+              <dd className="mt-1 text-xs text-ink-3 uppercase tracking-wider">
+                {s.label}
+              </dd>
+            </div>
+          ))}
+        </motion.dl>
+      </div>
+
+      {/* Corner scroll hint */}
+      <motion.a
+        href="#projects"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.9, duration: 0.6 }}
+        className="hidden lg:flex absolute right-8 bottom-10 items-center gap-2 text-xs font-mono uppercase tracking-widest text-ink-3 hover:text-accent transition-colors"
+      >
+        Scroll
+        <ArrowUpRight className="w-3.5 h-3.5 rotate-90" />
+      </motion.a>
     </section>
   );
 }

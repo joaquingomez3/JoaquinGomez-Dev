@@ -1,30 +1,19 @@
-"use client";
-
-import { Terminal } from "lucide-react";
-
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border py-8 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-md bg-gradient-to-br from-accent to-cyan-accent flex items-center justify-center">
-            <Terminal className="w-3 h-3 text-white" />
-          </div>
-          <span className="text-sm text-text-muted">
-            Joaquín<span className="text-accent">.</span>dev
+    <footer className="bg-ink text-paper/60 px-6 lg:px-8 pb-10 pt-4">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-paper/15 pt-8">
+        <div className="flex items-baseline gap-2">
+          <span className="font-display text-lg font-semibold text-paper">
+            Joaquín Gómez
           </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-accent -translate-y-[2px]" />
         </div>
 
-        <p className="text-sm text-text-muted">
-          © {new Date().getFullYear()} Joaquín Gómez — Todos los derechos reservados
+        <p className="font-mono text-xs">
+          © {new Date().getFullYear()} — San Luis, Argentina
         </p>
 
-        <div className="flex items-center gap-1 text-xs text-text-muted">
-          <span>Hecho con</span>
-          <span className="text-accent font-semibold">Next.js</span>
-          <span>+</span>
-          <span className="text-accent font-semibold">Framer Motion</span>
-        </div>
+        <p className="font-mono text-xs">Diseñado y construido con Next.js</p>
       </div>
     </footer>
   );

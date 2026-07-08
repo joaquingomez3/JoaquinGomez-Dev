@@ -1,191 +1,173 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github, Globe, Server, Building2, Smartphone } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
 
 interface Project {
+  index: string;
   title: string;
+  role: string;
+  year: string;
   description: string;
-  longDescription: string;
-  type: "Web" | "API" | "Gestión" | "Mobile";
-  technologies: string[];
-  githubUrl: string;
-  demoUrl?: string;
-  gradient: string;
-  icon: React.ReactNode;
-  gridClass: string;
+  metrics: string[];
+  tech: string[];
+  href?: string;
+  confidential?: boolean;
 }
 
 const projects: Project[] = [
   {
-    title: "Challenge Fit",
-    description: "App Android para entrenamiento personalizado con roles",
-    longDescription:
-      "Plataforma mobile que conecta entrenadores y alumnos en un entorno de entrenamiento digital. Implementa un sistema de login con roles diferenciados: los entrenadores acceden a un panel de administración donde crean rutinas, asignan ejercicios a sus alumnos y publican desafíos; mientras que los alumnos ven únicamente su contenido personalizado, registran su progreso y visualizan sus desafíos activos. La autenticación con JWT garantiza que cada vista y endpoint esté protegido según el rol del usuario.",
-    type: "Mobile",
-    technologies: [".NET", "C#", "Java", "Android Studio", "MySQL", "JWT", "REST API"],
-    githubUrl: "https://github.com/joaquingomez3",
-    gradient: "from-orange-500/20 via-red-500/10 to-rose-500/20",
-    icon: <Smartphone className="w-5 h-5" />,
-    gridClass: "md:col-span-2 md:row-span-1",
+    index: "01",
+    title: "Aplicación híbrida para cliente real",
+    role: "Práctica Profesional Supervisada",
+    year: "2026 — En curso",
+    description:
+      "App móvil híbrida Android/iOS con panel de administración web para un cliente del sector de servicios, desarrollada en equipo de 2 bajo acuerdo de confidencialidad. Incorporé Flutter y Dart de forma autodidacta para cubrir un requerimiento real no incluido en el plan de estudios.",
+    metrics: ["Android + iOS", "Panel web admin", "Equipo de 2"],
+    tech: ["Flutter", "Dart", "Web Admin", "Git/GitHub"],
+    confidential: true,
   },
   {
-    title: "Sistema de Agenda — Consultorios Médicos",
-    description: "Gestión integral de turnos y pacientes",
-    longDescription:
-      "Sistema web completo para la gestión de consultorios médicos. Incluye administración de pacientes, doctores y turnos con sistema de login seguro. Interfaz intuitiva con Bootstrap para una experiencia de usuario fluida.",
-    type: "Web",
-    technologies: ["Node.js", "MySQL", "Bootstrap", "Express", "Login/Auth"],
-    githubUrl: "https://github.com/joaquingomez3",
-    gradient: "from-violet-500/20 via-purple-500/10 to-fuchsia-500/20",
-    icon: <Globe className="w-5 h-5" />,
-    gridClass: "md:col-span-2 md:row-span-2",
+    index: "02",
+    title: "ChallengeFit",
+    role: "Proyecto personal · App de gestión deportiva",
+    year: "2025",
+    description:
+      "Plataforma de matching entre entrenadores y alumnos. Diseñé e integré individualmente una API REST de más de 20 endpoints consumida desde una app Android con Retrofit, con login por 2 roles, módulo de vinculación con seguimiento de progreso y CRUD completos de rutinas y desafíos. Resolví de forma autónoma un bug de cámara en Android 13 vía debugging asistido por IA.",
+    metrics: ["+20 endpoints", "+650 hs", "10 pantallas", "10-11 tablas"],
+    tech: [".NET / C#", "Android (Java)", "Retrofit", "MySQL", "JWT", "REST API"],
+    href: "https://github.com/joaquingomez3",
   },
   {
-    title: "API de Obras de Arte — Museo",
-    description: "API para gestión de colecciones artísticas",
-    longDescription:
-      "API desarrollada con JavaScript vanilla para la gestión y consulta de obras de arte de un museo. Interfaz frontend con HTML y CSS para la visualización del catálogo de obras.",
-    type: "API",
-    technologies: ["JavaScript", "HTML", "CSS", "REST API"],
-    githubUrl: "https://github.com/joaquingomez3",
-    gradient: "from-blue-500/20 via-cyan-500/10 to-teal-500/20",
-    icon: <Server className="w-5 h-5" />,
-    gridClass: "md:col-span-1 md:row-span-1",
+    index: "03",
+    title: "Sistema de turnos médicos",
+    role: "Proyecto académico · Gestión de consultorios",
+    year: "2024",
+    description:
+      "Sistema web de gestión de turnos con discriminación de 3 roles (secretaria, paciente y administrador). Implementé los CRUD de pacientes, doctores, obras sociales y días feriados, integrando FullCalendar y DataTables, cubriendo todo el flujo desde la solicitud del paciente hasta la confirmación.",
+    metrics: ["7 tablas", "3 roles", "+380 hs", "8-9 pantallas"],
+    tech: ["Node.js", "Express", "MySQL", "Bootstrap", "FullCalendar"],
+    href: "https://github.com/joaquingomez3",
   },
   {
-    title: "Sistema de Gestión Inmobiliaria",
-    description: "Plataforma integral para inmobiliarias",
-    longDescription:
-      "Sistema completo para la gestión de una inmobiliaria con módulos de propietarios, inquilinos, inmuebles, contratos y pagos. Incluye sistema de autenticación con login seguro.",
-    type: "Gestión",
-    technologies: [".NET", "C#", "MySQL", "Bootstrap", "Login/Auth"],
-    githubUrl: "https://github.com/joaquingomez3",
-    gradient: "from-emerald-500/20 via-green-500/10 to-lime-500/20",
-    icon: <Building2 className="w-5 h-5" />,
-    gridClass: "md:col-span-1 md:row-span-1",
+    index: "04",
+    title: "Gestión inmobiliaria web + mobile",
+    role: "Proyecto académico · Equipo de 2",
+    year: "2024",
+    description:
+      "Plataforma de gestión inmobiliaria con 3 roles de usuario. Lideré íntegramente la app Android (6 pantallas: login, perfil, propiedades, contratos, inquilinos y carga de imágenes) y participé en partes iguales del desarrollo web en .NET, incluyendo los CRUD de inmuebles, propietarios e inquilinos y el cálculo de pagos mensuales.",
+    metrics: ["Web + Mobile", "3 roles", "6-7 tablas", "Cálculo de pagos"],
+    tech: [".NET", "C#", "MySQL", "Bootstrap", "Android Studio"],
+    href: "https://github.com/joaquingomez3",
   },
 ];
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function Row({ project, i }: { project: Project; i: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const Wrapper = project.href ? motion.a : motion.div;
 
   return (
-    <motion.div
+    <Wrapper
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] as const }}
-      className={`${project.gridClass} group relative`}
+      {...(project.href
+        ? { href: project.href, target: "_blank", rel: "noopener noreferrer" }
+        : {})}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      className="group block border-t border-line py-8 sm:py-10 transition-colors duration-300 hover:bg-paper-2 -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-lg"
     >
-      <div className="relative h-full rounded-2xl border border-border bg-surface-light/40 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/5 hover:-translate-y-1">
-        {/* Gradient background */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-        />
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline">
+        {/* Index + year */}
+        <div className="md:col-span-2 flex md:flex-col items-center md:items-start justify-between gap-2">
+          <span className="font-mono text-sm text-accent">{project.index}</span>
+          <span className="font-mono text-xs text-ink-3">{project.year}</span>
+        </div>
 
-        {/* Content */}
-        <div className="relative z-10 p-6 sm:p-8 h-full flex flex-col">
-          {/* Header */}
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-accent/10 text-accent border border-accent/20">
-                {project.icon}
-              </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-3 py-1 rounded-full">
-                {project.type}
-              </span>
-            </div>
-            <div className="flex gap-2">
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-surface-lighter/50 text-text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"
-                aria-label="Ver código en GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              {project.demoUrl && (
-                <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-surface-lighter/50 text-text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"
-                  aria-label="Ver demo"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              )}
-            </div>
-          </div>
-
-          {/* Title & Description */}
-          <h3 className="text-xl sm:text-2xl font-bold text-text-primary mb-2 group-hover:text-accent transition-colors duration-300">
+        {/* Main */}
+        <div className="md:col-span-7">
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold text-ink group-hover:text-accent transition-colors flex items-center gap-3">
             {project.title}
+            {project.confidential && (
+              <Lock className="w-4 h-4 text-ink-3 shrink-0" />
+            )}
           </h3>
-          <p className="text-sm text-text-muted mb-2">{project.description}</p>
-          <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-grow">
-            {project.longDescription}
+          <p className="mt-1 text-sm text-ink-3">{project.role}</p>
+          <p className="mt-4 text-[0.95rem] text-ink-2 leading-relaxed max-w-2xl">
+            {project.description}
           </p>
-
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-2 mt-auto">
-            {project.technologies.map((tech) => (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.metrics.map((m) => (
               <span
-                key={tech}
-                className="text-xs font-medium px-3 py-1.5 rounded-lg bg-surface/60 text-text-secondary border border-border group-hover:border-accent/20 group-hover:text-accent/80 transition-colors duration-300"
+                key={m}
+                className="font-mono text-xs text-ink bg-accent-soft px-2.5 py-1 rounded"
               >
-                {tech}
+                {m}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Hover glow line at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Tech + arrow */}
+        <div className="md:col-span-3 flex flex-col md:items-end gap-4">
+          <div className="flex flex-wrap md:justify-end gap-x-3 gap-y-1">
+            {project.tech.map((t) => (
+              <span key={t} className="text-xs text-ink-3">
+                {t}
+              </span>
+            ))}
+          </div>
+          <span
+            className={`inline-flex items-center gap-1 text-xs font-semibold ${
+              project.confidential ? "text-ink-3" : "text-ink group-hover:text-accent"
+            } transition-colors`}
+          >
+            {project.confidential ? (
+              "Confidencial"
+            ) : (
+              <>
+                Ver en GitHub
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </>
+            )}
+          </span>
+        </div>
       </div>
-    </motion.div>
+    </Wrapper>
   );
 }
 
 export default function Projects() {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="relative py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Section header */}
+    <section id="projects" className="relative py-24 sm:py-32 px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         <motion.div
-          ref={sectionRef}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="flex items-end justify-between gap-6 mb-8"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-accent mb-4 block">
-            Portfolio
-          </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-text-primary mb-4">
-            Proyectos{" "}
-            <span className="bg-gradient-to-r from-accent to-cyan-accent bg-clip-text text-transparent">
-              académicos
-            </span>
-          </h2>
-          <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Proyectos desarrollados durante mi formación en la Tecnicatura en
-            Desarrollo de Software en la Universidad de La Punta.
+          <div>
+            <span className="kicker">Selección · 2024—2026</span>
+            <h2 className="mt-3 font-display text-4xl sm:text-6xl font-semibold text-ink tracking-tight">
+              Proyectos
+            </h2>
+          </div>
+          <p className="hidden sm:block text-sm text-ink-3 max-w-xs text-right">
+            Trabajo académico, personal y profesional. Del backend a la app móvil.
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+        <div className="border-b border-line">
+          {projects.map((project, i) => (
+            <Row key={project.title} project={project} i={i} />
           ))}
         </div>
       </div>

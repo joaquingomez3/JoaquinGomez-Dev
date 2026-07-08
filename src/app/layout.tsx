@@ -1,30 +1,63 @@
 import type { Metadata } from "next";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Joaquín Gómez | Fullstack Developer",
+  metadataBase: new URL("https://joaquingomez.dev"),
+  title: "Joaquín Gómez — Desarrollador Full Stack Junior",
   description:
-    "Portfolio profesional de Joaquín Gómez — Desarrollador Fullstack especializado en .NET, C#, JavaScript, React, Node.js y MySQL. Estudiante avanzado en Tecnicatura en Desarrollo de Software.",
+    "Desarrollador Full Stack Junior de San Luis, Argentina. APIs backend con Node.js y .NET, apps móviles híbridas con Flutter y bases de datos MySQL. Próximo a graduarme de la Tecnicatura en Desarrollo de Software.",
   keywords: [
     "Joaquín Gómez",
-    "fullstack developer",
-    "desarrollador software",
+    "desarrollador full stack",
+    "full stack junior",
+    "backend developer",
+    "node.js",
     ".net",
     "c#",
+    "flutter",
     "react",
-    "node.js",
-    "javascript",
     "mysql",
-    "portfolio",
+    "api rest",
     "San Luis",
     "Argentina",
   ],
   authors: [{ name: "Joaquín Gómez" }],
+  creator: "Joaquín Gómez",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Joaquín Gómez | Fullstack Developer",
+    title: "Joaquín Gómez — Desarrollador Full Stack Junior",
     description:
-      "Desarrollador Fullstack especializado en soluciones web con .NET, React, Node.js y MySQL.",
+      "APIs backend (Node.js & .NET), desarrollo móvil híbrido con Flutter y bases de datos MySQL. Buscando mi primera posición Full Stack.",
     type: "website",
+    locale: "es_AR",
+    url: "/",
+    siteName: "Joaquín Gómez",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Joaquín Gómez — Desarrollador Full Stack Junior",
+    description:
+      "APIs backend (Node.js & .NET), desarrollo móvil híbrido con Flutter y bases de datos MySQL.",
   },
 };
 
@@ -34,13 +67,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang="es"
+      className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable}`}
+    >
       <body className="antialiased">{children}</body>
     </html>
   );
