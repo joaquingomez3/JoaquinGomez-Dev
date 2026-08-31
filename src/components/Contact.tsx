@@ -1,92 +1,102 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { LineMask, Reveal } from "./motion/Reveal";
 
 const links = [
   {
-    label: "Email",
+    key: "email",
+    label: "EMAIL",
     value: "gomezjoaquing3@gmail.com",
     href: "mailto:gomezjoaquing3@gmail.com",
   },
   {
-    label: "LinkedIn",
+    key: "linkedin",
+    label: "LINKEDIN",
     value: "in/joaquingomez-dev",
     href: "https://www.linkedin.com/in/joaquingomez-dev",
   },
   {
-    label: "GitHub",
+    key: "github",
+    label: "GITHUB",
     value: "github.com/joaquingomez3",
     href: "https://github.com/joaquingomez3",
   },
 ];
 
 export default function Contact() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
     <section
       id="contact"
-      className="relative py-20 sm:py-32 px-6 lg:px-8 bg-ink text-paper"
+      className="pb-16 pt-10 sm:pb-24 sm:pt-14 md:pb-36 md:pt-14"
     >
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span className="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent">
-            Contacto
-          </span>
-          <h2 className="mt-5 font-display text-[clamp(2.75rem,13vw,7rem)] font-semibold tracking-tight leading-[0.95]">
-            ¿Trabajamos
-            <br />
-            <span className="italic">juntos?</span>
-          </h2>
-          <p className="mt-6 max-w-xl text-base sm:text-lg text-paper/70 leading-relaxed">
+      <div className="container-fx text-center">
+        <Reveal>
+          <div className="t-rule flex items-center justify-between gap-4 pb-4 pt-6">
+            <span className="label-accent">§04 / CONTACTO</span>
+            <span className="label hidden sm:inline">RESPONDO RÁPIDO</span>
+          </div>
+        </Reveal>
+
+        <h2 className="h-display mt-12 text-[clamp(2.2rem,11vw,9rem)] uppercase">
+          <LineMask>¿Trabajamos</LineMask>
+          <LineMask delay={0.1}>
+            <span className="text-outline">juntos</span>
+            <span className="text-accent">?</span>
+          </LineMask>
+        </h2>
+
+        <Reveal>
+          <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-ink-soft">
             Busco mi primera experiencia laboral en IT, con disponibilidad
             inmediata. Si tenés una vacante o un proyecto, escribime — respondo
             rápido.
           </p>
+        </Reveal>
 
-          <a
-            href="mailto:gomezjoaquing3@gmail.com"
-            className="group mt-8 inline-flex items-center gap-3 bg-accent text-paper text-sm sm:text-base font-semibold pl-6 pr-5 py-3.5 sm:py-4 rounded-full hover:bg-paper hover:text-ink transition-colors duration-300"
-          >
-            Enviame un email
-            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 sm:mt-20 border-t border-paper/15"
-        >
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              className="group block border-b border-paper/15 py-5 sm:py-6 transition-colors"
-            >
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                <span className="font-mono text-[0.7rem] uppercase tracking-widest text-paper/50 group-hover:text-accent transition-colors">
-                  {link.label}
-                </span>
-                <span className="flex items-center gap-2 min-w-0 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-paper group-hover:text-accent transition-colors">
-                  <span className="truncate">{link.value}</span>
-                  <ArrowUpRight className="w-5 h-5 shrink-0 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                </span>
-              </div>
+        <Reveal delay={0.08}>
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <a href="mailto:gomezjoaquing3@gmail.com" className="btn-force">
+              Enviame un email
             </a>
-          ))}
-        </motion.div>
+            <a
+              href="/CV_Joaquin_Gomez.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost-brutal"
+            >
+              Descargar CV
+            </a>
+          </div>
+        </Reveal>
+      </div>
+
+      <div className="container-fx mt-16 md:mt-20">
+        <Reveal>
+          <div className="t-rule grid border-x border-rule sm:grid-cols-3">
+            {links.map((l) => (
+              <a
+                key={l.key}
+                href={l.href}
+                target={l.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between gap-3 border-b border-rule px-5 py-6 text-left transition-colors hover:bg-accent hover:text-accent-ink sm:border-r sm:last:border-r-0"
+              >
+                <span className="flex min-w-0 flex-col gap-1.5">
+                  <span className="font-mono text-[11px] text-ink-faint transition-colors group-hover:text-accent-ink/70">
+                    /{l.key}
+                  </span>
+                  <span className="font-mono text-sm font-semibold uppercase tracking-widest">
+                    {l.label}
+                  </span>
+                  <span className="truncate font-mono text-[11px] text-ink-soft transition-colors group-hover:text-accent-ink/80">
+                    {l.value}
+                  </span>
+                </span>
+                <span className="font-mono shrink-0">↗</span>
+              </a>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

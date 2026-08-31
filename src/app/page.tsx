@@ -9,17 +9,17 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="paper-grain relative min-h-screen">
-      <div className="relative z-10">
-        <Navbar />
+    <div className="min-h-screen bg-bg">
+      <Navbar />
+      <main>
         <Hero />
         <Marquee />
         <Projects />
         <TechStack />
         <About />
         <Contact />
-        <Footer />
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import SectionHeader from "./SectionHeader";
+import { Reveal } from "./motion/Reveal";
 
 interface Group {
   n: string;
@@ -13,7 +13,16 @@ const groups: Group[] = [
   {
     n: "01",
     name: "Lenguajes",
-    items: ["JavaScript", "C#", "Java", "Dart", "Python", "HTML", "CSS"],
+    items: [
+      "JavaScript",
+      "TypeScript",
+      "C#",
+      "Java",
+      "Dart",
+      "Python",
+      "HTML",
+      "CSS",
+    ],
   },
   {
     n: "02",
@@ -23,8 +32,12 @@ const groups: Group[] = [
       "Express",
       ".NET / .NET Core",
       "ASP.NET Web API",
+      "Next.js (App Router)",
+      "Server Actions",
       "API RESTful",
       "JWT",
+      "Auth.js",
+      "Zod",
       "Auth por roles",
     ],
   },
@@ -36,12 +49,29 @@ const groups: Group[] = [
   {
     n: "04",
     name: "Frontend",
-    items: ["React", "Bootstrap", "HTML / CSS", "FullCalendar", "DataTables"],
+    items: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Radix UI / shadcn",
+      "Recharts",
+      "Bootstrap",
+      "FullCalendar",
+      "DataTables",
+    ],
   },
   {
     n: "05",
     name: "Datos",
-    items: ["MySQL", "SQL Server", "Modelado relacional", "Pandas", "NumPy"],
+    items: [
+      "MySQL",
+      "PostgreSQL / Neon",
+      "SQL Server",
+      "Drizzle ORM",
+      "Modelado relacional",
+      "Pandas",
+      "NumPy",
+    ],
   },
   {
     n: "06",
@@ -50,6 +80,7 @@ const groups: Group[] = [
       "Git / GitHub",
       "Pull requests",
       "Postman",
+      "Vitest",
       "Vercel",
       "VS Code",
       "Claude · Claude Code",
@@ -58,66 +89,44 @@ const groups: Group[] = [
   },
 ];
 
-function GroupBlock({ group, i }: { group: Group; i: number }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="border-t border-line pt-6"
-    >
-      <div className="flex items-baseline gap-3 mb-5">
-        <span className="font-mono text-xs text-accent">{group.n}</span>
-        <h3 className="font-display text-xl font-semibold text-ink">
-          {group.name}
-        </h3>
-      </div>
-      <ul className="flex flex-wrap gap-2">
-        {group.items.map((item) => (
-          <li
-            key={item}
-            className="text-sm text-ink-2 border border-line-strong rounded-full px-3 py-1.5 hover:border-ink hover:text-ink transition-colors"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-    </motion.div>
-  );
-}
-
 export default function TechStack() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="tech" className="relative py-20 sm:py-32 px-6 lg:px-8 bg-paper-2">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-12 max-w-2xl"
-        >
-          <span className="kicker">Herramientas del oficio</span>
-          <h2 className="mt-3 font-display text-4xl sm:text-6xl font-semibold text-ink tracking-tight">
-            Stack tecnológico
-          </h2>
-          <p className="mt-4 text-ink-2 text-lg">
-            Lo que uso para construir de punta a punta: del diseño de la API y el
-            modelo de datos hasta la app móvil que lo consume.
-          </p>
-        </motion.div>
+    <section
+      id="tech"
+      className="border-y border-rule bg-bg-soft pb-16 pt-10 sm:pb-24 sm:pt-14 md:pb-28 md:pt-16"
+    >
+      <SectionHeader
+        num="§02"
+        label="HERRAMIENTAS DEL OFICIO"
+        title="Stack tecnológico"
+        desc="Lo que uso para construir de punta a punta: del diseño de la API y el modelo de datos hasta la app móvil que lo consume."
+        monoTag="02 / INDEX"
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
-          {groups.map((group, i) => (
-            <GroupBlock key={group.name} group={group} i={i} />
+      <div className="container-fx mt-10 md:mt-14">
+        <ul className="t-rule" role="list">
+          {groups.map((group) => (
+            <li key={group.name} className="b-rule">
+              <Reveal>
+                <div className="grid items-baseline gap-4 py-7 md:grid-cols-12 md:gap-6 md:py-9">
+                  <span className="font-mono text-[12px] text-accent md:col-span-1">
+                    {group.n}
+                  </span>
+                  <h3 className="font-display text-2xl font-bold uppercase md:col-span-4 md:text-3xl">
+                    {group.name}
+                  </h3>
+                  <ul className="flex flex-wrap gap-2 md:col-span-7" role="list">
+                    {group.items.map((item) => (
+                      <li key={item} className="chip">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-space-grotesk",
   display: "swap",
-  axes: ["opsz"],
+  weight: ["500", "600", "700"],
 });
 
 const inter = Inter({
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://joaquingomez.dev"),
   title: "Joaquín Gómez — Desarrollador Full Stack Junior",
   description:
-    "Desarrollador Full Stack Junior de San Luis, Argentina. APIs backend con Node.js y .NET, apps móviles híbridas con Flutter y bases de datos MySQL. Próximo a graduarme de la Tecnicatura en Desarrollo de Software.",
+    "Desarrollador Full Stack Junior de San Luis, Argentina. Diseño la base de datos, escribo la API, armo el panel web y la app móvil que lo consume: Node.js, .NET, Next.js, React y Flutter. Con un sistema entregado y en producción para un cliente real.",
   keywords: [
     "Joaquín Gómez",
     "desarrollador full stack",
@@ -36,8 +36,12 @@ export const metadata: Metadata = {
     "c#",
     "flutter",
     "react",
+    "next.js",
+    "typescript",
     "mysql",
+    "postgresql",
     "api rest",
+    "sistema de gestión",
     "San Luis",
     "Argentina",
   ],
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Joaquín Gómez — Desarrollador Full Stack Junior",
     description:
-      "APIs backend (Node.js & .NET), desarrollo móvil híbrido con Flutter y bases de datos MySQL. Buscando mi primera posición Full Stack.",
+      "De la base de datos a la app móvil: Node.js, .NET, Next.js, React y Flutter. Un sistema entregado y en producción para un cliente real. Buscando mi primera posición Full Stack.",
     type: "website",
     locale: "es_AR",
     url: "/",
@@ -57,8 +61,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Joaquín Gómez — Desarrollador Full Stack Junior",
     description:
-      "APIs backend (Node.js & .NET), desarrollo móvil híbrido con Flutter y bases de datos MySQL.",
+      "De la base de datos a la app móvil: Node.js, .NET, Next.js, React y Flutter. Un sistema entregado y en producción para un cliente real.",
   },
+};
+
+export const viewport = {
+  themeColor: "#0a0a0a",
+  colorScheme: "dark" as const,
 };
 
 export default function RootLayout({
@@ -69,9 +78,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="bg-bg text-ink antialiased">{children}</body>
     </html>
   );
 }
